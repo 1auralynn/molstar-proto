@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018 Mol* contributors, licensed under MIT, See LICENSE file for more info.
  *
  * @author David Sehnal <david.sehnal@gmail.com>
@@ -59,6 +59,11 @@ function apply(env: Environment, head: CompileResult, args: RuntimeArguments, co
 function compile(env: Environment, expression: Expression): CompileResult {
     if (Expression.isLiteral(expression)) {
         return CompileResult.Const(expression);
+    }
+
+    if (Expression.isSymbol(expression)) {
+        // TOTO: this needs to look up in the symbol table.
+        return 0 as any;
     }
 
     const head = compile(env, expression.head);
